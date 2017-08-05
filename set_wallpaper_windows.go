@@ -9,7 +9,7 @@ import (
 
 // GetWallpaperPath returns the path to store the wallpaper
 func GetWallpaperPath() string {
-	return os.Getenv("HOME") + "/Pictures/wallpaper.jpg"
+	return os.Getenv("USERPROFILE") + "\\Pictures\\wallpaper.jpg"
 }
 
 // SetWallpaper sets the wallpaper from path for macOS
