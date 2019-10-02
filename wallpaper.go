@@ -9,10 +9,11 @@ import (
 
 
 func main() {
-	url := GetWallpaperURL()
+	img := GetLastImage("pl-PL")
 	log.Println("Downloading wallpaper")
+	log.Println(img.fileName())
 	wallpaperPath := GetWallpaperPath()
-	DownloadWallpaper(url, wallpaperPath)
+	DownloadWallpaper(img.fullUrl(), wallpaperPath)
 	log.Println("Wallpaper downloaded")
 	log.Printf("Setting wallpaper to %s\n", wallpaperPath)
 	SetWallpaper(wallpaperPath)
@@ -21,7 +22,7 @@ func main() {
 // DownloadWallpaper downloads the wallpaper from the provided url
 // It stores the wallpaper in the path provided
 func DownloadWallpaper(url string, path string) {
-	res, err := http.Get(BingURL + url)
+	res, err := http.Get(url)
 	if err != nil {
 		log.Fatalf("Failed to download image.\nError is: %v\n", err)
 	}
