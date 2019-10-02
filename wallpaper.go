@@ -22,7 +22,9 @@ type ImageResponse struct {
 
 // Image is the properties of the image in the ImageResponse
 type Image struct {
-	URL string `json:"url"`
+	URL       string `json:"url"`
+	CopyRight string `json:"copyright"`
+	StartDate int    `json:"startdate,string"`
 }
 
 func main() {
