@@ -25,8 +25,7 @@ type Image struct {
 	StartDate int    `json:"startdate,string"`
 }
 
-// GetWallpaperURL returns the url for today's wallpaper from bing
-func GetWallpaperURL() string {
+func GetLastImage() Image {
 	res, err := http.Get(BingURL + ImageAPIEndpoint)
 	if err != nil {
 		log.Fatalf("Failed to get response.\nError is: %v\n", err)
@@ -39,5 +38,10 @@ func GetWallpaperURL() string {
 	if err != nil {
 		log.Fatalf("Failed to decode json.\nError is: %v\n", err)
 	}
-	return imgResponse.Images[0].URL
+	return imgResponse.Images[0]
+}
+
+// GetWallpaperURL returns the url for today's wallpaper from bing
+func GetWallpaperURL() string {
+	return GetLastImage().URL
 }
