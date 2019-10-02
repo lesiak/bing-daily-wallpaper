@@ -2,9 +2,9 @@ package bing
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
-	"strconv"
 	"strings"
 )
 
@@ -22,17 +22,19 @@ type ImageResponse struct {
 
 // Image is the properties of the image in the ImageResponse
 type Image struct {
-	URL       string `json:"url"`
+	Url       string `json:"url"`
+	UrlBase   string `json:"urlbase"`
 	CopyRight string `json:"copyright"`
 	StartDate int    `json:"startdate,string"`
 }
 
 func (img Image) FullUrl() string {
-	return BingURL + img.URL;
+	return fmt.Sprintf("%s%s_%s.jpg", BingURL, img.UrlBase, "1920x1080")
 }
 
 func (img Image) FileName() string {
-	return strconv.Itoa(img.StartDate) + " " + strings.Split(img.CopyRight, " (©")[0] + ".jpg"
+	title := strings.Split(img.CopyRight, " (©")[0]
+	return fmt.Sprintf("%d %s %s.jpg", img.StartDate, title, "1920x1080")
 }
 
 func GetLastImage(region string) Image {
