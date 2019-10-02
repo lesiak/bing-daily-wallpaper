@@ -1,22 +1,22 @@
 package main
 
 import (
+	"../../pkg/bing"
+	"../../pkg/wallpaper"
 	"io"
 	"log"
 	"net/http"
 	"os"
 )
 
-
 func main() {
-	img := GetLastImage("pl-PL")
+	img := bing.GetLastImage("pl-PL")
 	log.Println("Downloading wallpaper")
-	log.Println(img.fileName())
-	wallpaperPath := GetWallpaperPath()
-	DownloadWallpaper(img.fullUrl(), wallpaperPath)
+	wallpaperPath := wallpaper.GetWallpaperPath(img.FileName())
+	DownloadWallpaper(img.FullUrl(), wallpaperPath)
 	log.Println("Wallpaper downloaded")
 	log.Printf("Setting wallpaper to %s\n", wallpaperPath)
-	SetWallpaper(wallpaperPath)
+	wallpaper.SetWallpaper(wallpaperPath)
 }
 
 // DownloadWallpaper downloads the wallpaper from the provided url

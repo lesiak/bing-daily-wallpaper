@@ -1,9 +1,11 @@
-package main
+package bing
 
 import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"strconv"
+	"strings"
 )
 
 const (
@@ -25,12 +27,12 @@ type Image struct {
 	StartDate int    `json:"startdate,string"`
 }
 
-func (img Image) fullUrl() string {
+func (img Image) FullUrl() string {
 	return BingURL + img.URL;
 }
 
-func (img Image) fileName() string {
-	return img.CopyRight;
+func (img Image) FileName() string {
+	return strconv.Itoa(img.StartDate) + " " + strings.Split(img.CopyRight, " (©")[0] + ".jpg"
 }
 
 func GetLastImage(region string) Image {

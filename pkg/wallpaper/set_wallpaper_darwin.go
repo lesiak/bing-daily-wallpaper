@@ -1,4 +1,4 @@
-package main
+package wallpaper
 
 import (
 	"database/sql"
@@ -10,8 +10,8 @@ import (
 )
 
 // GetWallpaperPath returns the path to store the wallpaper
-func GetWallpaperPath() string {
-	return os.Getenv("HOME") + "/Pictures/wallpaper.jpg"
+func GetWallpaperPath(fileName string) string {
+	return os.Getenv("HOME") + "/Pictures/" + fileName
 }
 
 // SetWallpaper sets the wallpaper from path for macOS
