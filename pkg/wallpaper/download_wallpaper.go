@@ -20,5 +20,8 @@ func DownloadWallpaper(url string, path string) {
 	}
 	defer res.Body.Close()
 	defer wallpaper.Close()
-	io.Copy(wallpaper, res.Body)
+	_, err = io.Copy(wallpaper, res.Body)
+	if err != nil {
+		log.Fatalf("Unable to download file.\nError is: %v\n", err)
+	}
 }
