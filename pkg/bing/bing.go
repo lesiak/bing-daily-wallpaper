@@ -13,6 +13,7 @@ const (
 	BingURL = "http://www.bing.com"
 	// ImageAPIEndpoint is the API endpoint to get today's wallpaper
 	ImageAPIEndpoint = "/HPImageArchive.aspx?format=js&idx=0&n=1&mkt="
+	MultipleImagesAPIEndpoint = "/HPImageArchive.aspx?format=js&idx=0&n=100&mkt="
 )
 
 // ImageResponse is the response obtained from ImageApiEndpoint
@@ -51,4 +52,20 @@ func GetLastImage(region string) Image {
 		log.Fatalf("Failed to decode json.\nError is: %v\n", err)
 	}
 	return imgResponse.Images[0]
+}
+
+func GetRecentImages(region string) []Image {
+	res, err := http.Get(BingURL + MultipleImagesAPIEndpoint + region)
+	if err != nil {
+		log.Fatalf("Failed to get response.\nError is: %v\n", err)
+	}
+	defer res.Body.Close()
+	// Decode json
+	decoder := json.NewDecoder(res.Body)
+	var imgResponse ImageResponse
+	err = decoder.Decode(&imgResponse)
+	if err != nil {
+		log.Fatalf("Failed to decode json.\nError is: %v\n", err)
+	}
+	return imgResponse.Images
 }
