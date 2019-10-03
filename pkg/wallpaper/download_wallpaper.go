@@ -10,11 +10,16 @@ import (
 // DownloadWallpaper downloads the wallpaper from the provided url
 // It stores the wallpaper in the path provided
 func DownloadWallpaper(url string, path string) {
+	log.Printf("Downloading wallpaper %v", url)
 	res, err := http.Get(url)
 	if err != nil {
 		log.Fatalf("Failed to download image.\nError is: %v\n", err)
 	}
-	wallpaper, err := os.Create(path)
+	wallpaper, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE|os.O_EXCL, 0666)
+	if os.IsExist(err) {
+		log.Printf("Wallpaper already exists: %v", path)
+		return
+	}
 	if err != nil {
 		log.Fatalf("Unable to create file.\nError is: %v\n", err)
 	}
@@ -23,5 +28,7 @@ func DownloadWallpaper(url string, path string) {
 	_, err = io.Copy(wallpaper, res.Body)
 	if err != nil {
 		log.Fatalf("Unable to download file.\nError is: %v\n", err)
+	} else {
+		log.Printf("Wallpaper downloaded to: %v", path)
 	}
 }
