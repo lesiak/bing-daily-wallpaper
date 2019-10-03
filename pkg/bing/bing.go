@@ -28,13 +28,13 @@ type Image struct {
 	StartDate int    `json:"startdate,string"`
 }
 
-func (img Image) FullUrl() string {
-	return fmt.Sprintf("%s%s_%s.jpg", BingURL, img.UrlBase, "1920x1080")
+func (img Image) FullUrl(resolution string) string {
+	return fmt.Sprintf("%s%s_%s.jpg", BingURL, img.UrlBase, resolution)
 }
 
-func (img Image) FileName() string {
+func (img Image) FileName(resolution string) string {
 	title := strings.Split(img.CopyRight, " (©")[0]
-	return fmt.Sprintf("%d %s %s.jpg", img.StartDate, title, "1920x1080")
+	return fmt.Sprintf("%d %s %s.jpg", img.StartDate, title, resolution)
 }
 
 func GetLastImage(region string) Image {
