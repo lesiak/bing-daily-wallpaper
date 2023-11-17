@@ -21,7 +21,7 @@ case "$OS" in
     echo "Downloading wallpaper"
     curl -sSLo "$HOME/Pictures/wallpaper.jpg" "$WALLPAPER_URL"
     echo "Setting wallpaper"
-    osascript -e "tell application \"Finder\" to set desktop picture to \"$HOME/Pictures/wallpaper.jpg\" as POSIX file"
-    killall Dock
+    osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"$HOME/Pictures/wallpaper.jpg\" as POSIX file"
+  #  killall Dock
     ;;
 esac
