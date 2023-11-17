@@ -24,7 +24,7 @@ WALLPAPER_URL_TITLE=`echo $WALLPAPER_DATA | jq -r '.copyright' | sed 's/ (©.*//
 WALLPAPER_URL_BASE=`echo $WALLPAPER_DATA | jq -r '.urlbase'`
 WALLPAPER_START_DATE=`echo $WALLPAPER_DATA | jq -r '.startdate'`
 
-Resolution="1920x1080"
+Resolution="UHD"
 
 FullUrl="${BingURL}${WALLPAPER_URL_BASE}_${Resolution}.jpg"
 FileName="${WALLPAPER_START_DATE} ${WALLPAPER_URL_TITLE} ${Resolution}.jpg"
