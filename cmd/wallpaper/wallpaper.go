@@ -1,16 +1,15 @@
 package main
 
 import (
-	"../../pkg/bing"
-	"../../pkg/wallpaper"
+	"bing-daily-wallpaper/utils/bing"
+	"bing-daily-wallpaper/utils/wallpaper"
 	"log"
 )
 
 const (
 	ResolutionHorizontal = "1920x1080"
-	ResolutionVertical = "1080x1920"
+	ResolutionVertical   = "1080x1920"
 )
-
 
 func main() {
 	img := bing.GetLastImage("pl-PL")
