@@ -3,9 +3,9 @@
 OS="$(uname)"
 Region="pl-PL"
 BingURL="https://www.bing.com"
+DaysAgo=${1:-0}
 #ImageAPIEndpoint is the API endpoint to get today's wallpaper
-ImageAPIEndpoint="/HPImageArchive.aspx?format=js&idx=0&n=1&mkt="
-MultipleImagesAPIEndpoint="/HPImageArchive.aspx?format=js&idx=0&n=100&mkt="
+ImageAPIEndpoint="/HPImageArchive.aspx?format=js&idx=${DaysAgo}&n=10&mkt="
 BingImageAPIUrl="${BingURL}${ImageAPIEndpoint}${Region}"
 
 check_internet() {
